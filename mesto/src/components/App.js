@@ -1,33 +1,17 @@
-import logo from './logo.svg';
 import React from 'react';
-import './index.css';
+import '../index.css';
+import {Header} from './Header.js';
+import {Main} from './Main.js';
+import {Footer} from './Footer.js';
 
 function App() {
   return (
   <>
-    <body className="page">
+    <div className="page">
       <div className="page__size">
-      <header className="header">
-        <img className="header__logo" src="<%=require('./images/headerLogo.svg')%>" alt="Логотип Mesto"/>
-      </header>
-      <main>
-      <section className="profile">
-        <a className="profile__avatar-hover" href="#"><img className="profile__avatar" alt="Аватар профиля"/></a>
-        <div className="profile__info">
-          <h1 className="profile__name"></h1>
-          <button className="profile__edit-button" type="button"></button>
-          <p className="profile__status"></p>
-        </div>
-        <button className="profile__add-button" type="button"></button>
-      </section>
-      <section className="elements">
-        <ul className="elements__list">
-        </ul>
-      </section>
-      </main>
-      <footer className="footer">
-        <p className="footer__text">© 2022 Mesto Russia</p>
-      </footer>
+        <Header/>
+      <Main />
+      <Footer />
     </div>
     <div className="popup popup_edit">
       <div className="popup__overlay"></div>
@@ -103,7 +87,7 @@ function App() {
         </form>
       </div>
     </div>
-  </body>
+  </div>
 </>  
   );
 }
