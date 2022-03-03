@@ -34,12 +34,22 @@ const handleAddPlaceClick = () => {
       onEditAvatar={handleEditAvatarClick}
       onEditProfile={handleEditProfileClick}
       onAddPlace={handleAddPlaceClick}
-        />
+      />
       <Footer />
       <PopupWithForm
       name="edit"
       isOpen={isEditProfilePopupOpen}
-      title="Редактировать профиль" />
+      title="Редактировать профиль"
+      />
+      <PopupWithForm
+      name="change-photo"
+      isOpen={isEditAvatarPopupOpen}
+      title="Обновить аватар"
+      />
+      <PopupWithForm
+      name="add"
+      isOpen={isAddPlacePopupOpen}
+      title="Новое место"/>
     </div>
     <div className="popup popup_image">
       <div className="popup__overlay"></div>
