@@ -38,16 +38,54 @@ const handleAddPlaceClick = () => {
       <Footer />
       <PopupWithForm
       name="edit"
+      children={
+      <>  
+          <ul className="popup__list">
+          <li className="popup__list-element">
+            <input type="text" className="popup__data-box" required minLength="2" maxLength="40" name="name" placeholder="Имя пользователя"/>
+            <span className="popup__input-error" id="name-error"></span>
+          </li>
+          <li className="popup__list-element">
+            <input type="text" className="popup__data-box" required minLength="2" maxLength="200" name="status" placeholder="Профессиональная деятельность"/>
+            <span className="popup__input-error" id="status-error"></span>
+          </li>
+        </ul>
+      </>
+      }
       isOpen={isEditProfilePopupOpen}
       title="Редактировать профиль"
       />
       <PopupWithForm
-      name="change-photo"
+      name="avatar"
+      children={
+      <>
+          <ul className="popup__list">
+            <li className="popup__list-element">
+              <input type="url" className="popup__data-box" name="avatar" required placeholder="Сылка на аватар"/>
+              <span className="popup__input-error" id="avatar-error"></span>
+            </li>
+          </ul>
+      </>
+      }
       isOpen={isEditAvatarPopupOpen}
       title="Обновить аватар"
       />
       <PopupWithForm
       name="add"
+      children={
+        <>
+          <ul className="popup__list">
+            <li className="popup__list-element">
+              <input type="text" className="popup__data-box" name="place-name" required minLength="2" maxLength="30" placeholder="Название"/>
+              <span className="popup__input-error" id="place-name-error"></span>
+            </li>
+            <li className="popup__list-element">
+              <input type="url" className="popup__data-box" name="place-link" required placeholder="Сылка на картинку"/>
+              <span className="popup__input-error" id="place-link-error"></span>
+            </li>
+          </ul>
+        </>
+      }
       isOpen={isAddPlacePopupOpen}
       title="Новое место"/>
     </div>

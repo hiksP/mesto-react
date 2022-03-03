@@ -1,4 +1,4 @@
-export function PopupWithForm({title, name, children, isOpen}) {
+export function PopupWithForm({name, children, isOpen, title}) {
     return(
         <>
     <div className={isOpen ? `popup popup_${name} popup_opened` : `popup popup_${name}`}>
@@ -7,16 +7,7 @@ export function PopupWithForm({title, name, children, isOpen}) {
         <button className={`popup__close popup__close_${name}`} type="button"></button>
         <form className={`popup__form popup__form_${name}`} noValidate name={`data-${name}`}>
           <h3 className="popup__title">{title}</h3>
-          <ul className="popup__list">
-            <li className="popup__list-element">
-              <input type="text" className="popup__data-box" required minLength="2" maxLength="40" name="name" placeholder="Имя пользователя"/>
-              <span className="popup__input-error" id="name-error"></span>
-            </li>
-            <li className="popup__list-element">
-              <input type="text" className="popup__data-box" required minLength="2" maxLength="200" name="status" placeholder="Профессиональная деятельность"/>
-              <span className="popup__input-error" id="status-error"></span>
-            </li>
-          </ul>
+          {children}
           <button className="popup__submit" type="submit">Сохранить</button>
         </form>
       </div>
@@ -49,11 +40,11 @@ export function PopupWithForm({title, name, children, isOpen}) {
         <button className="popup__submit" type="submit">Да</button>
       </div>
     </div>
-    <div className="popup popup_change-photo">
+    <div className="popup popup_avatar">
       <div className="popup__overlay"></div>
       <div className="popup__container">
-        <button className="popup__close popup__close_change" type="button"></button>
-        <form className="popup__form popup__form_change" noValidate name="data-change">
+        <button className="popup__close popup__close_avatar" type="button"></button>
+        <form className="popup__form popup__form_avatar" noValidate name="data-avatar">
           <h3 className="popup__title">Обновить аватар</h3>
           <ul className="popup__list">
             <li className="popup__list-element">
