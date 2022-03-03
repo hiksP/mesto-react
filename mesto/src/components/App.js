@@ -12,7 +12,6 @@ const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
 
 
-
 const handleEditAvatarClick = () => {
   setEditAvatarPopupOpen(true);
 }
@@ -23,6 +22,14 @@ const handleEditProfileClick = () => {
 
 const handleAddPlaceClick = () => {
   setAddPlacePopupOpen(true);
+}
+
+const closeAllPopups = (evt) => {
+  if(evt.key === 'Escape' || evt.nativeEvent.path[2].classList.contains('popup_opened')) {
+    setEditAvatarPopupOpen(false);
+    setEditProfilePopupOpen(false);
+    setAddPlacePopupOpen(false);
+  }
 }
 
   return (
@@ -53,6 +60,7 @@ const handleAddPlaceClick = () => {
       </>
       }
       isOpen={isEditProfilePopupOpen}
+      onClose={closeAllPopups}
       title="Редактировать профиль"
       />
       <PopupWithForm
@@ -68,6 +76,7 @@ const handleAddPlaceClick = () => {
       </>
       }
       isOpen={isEditAvatarPopupOpen}
+      onClose={closeAllPopups}
       title="Обновить аватар"
       />
       <PopupWithForm
@@ -87,6 +96,7 @@ const handleAddPlaceClick = () => {
         </>
       }
       isOpen={isAddPlacePopupOpen}
+      onClose={closeAllPopups}
       title="Новое место"/>
     </div>
     <div className="popup popup_image">

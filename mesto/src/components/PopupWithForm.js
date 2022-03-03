@@ -1,10 +1,28 @@
-export function PopupWithForm({name, children, isOpen, title}) {
+import { useEffect } from "react";
+
+export function PopupWithForm({name, children, isOpen, onClose, title}) {
+    
+    const handleEscClose = (evt) => {
+        if(evt.key === "Escape") {
+            onClose(evt)
+        } 
+    }
+
+    useEffect(() => {
+        if(isOpen) {
+            document.addEventListener('keydown', handleEscClose);
+        }
+        return () => {
+            document.removeEventListener('keydown', handleEscClose);
+        }
+    }, [isOpen]);
+
     return(
         <>
     <div className={isOpen ? `popup popup_${name} popup_opened` : `popup popup_${name}`}>
       <div className="popup__overlay"></div>
       <div className="popup__container">
-        <button className={`popup__close popup__close_${name}`} type="button"></button>
+        <button className={`popup__close popup__close_${name}`} type="button" onClick={onClose}></button>
         <form className={`popup__form popup__form_${name}`} noValidate name={`data-${name}`}>
           <h3 className="popup__title">{title}</h3>
           {children}
