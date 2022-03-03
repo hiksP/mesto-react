@@ -6,16 +6,19 @@ import {Footer} from './Footer.js';
 
 function App() {
 
-const handleEditAvatarClick = (evt) => {
-  console.log(evt)
+const handleEditAvatarClick = () => {
+  let popup = document.querySelector('.popup_change-photo');
+  popup.classList.add('popup_opened');
 }
 
-const handleEditProfileClick = (evt) => {
-  console.log(evt)
+const handleEditProfileClick = () => {
+  let popup = document.querySelector('.popup_edit');
+  popup.classList.add('popup_opened');
 }
 
-const handleAddPlaceClick = (evt) => {
-  console.log(evt)
+const handleAddPlaceClick = () => {
+  let popup = document.querySelector('.popup_add');
+  popup.classList.add('popup_opened');
 }
 
   return (
