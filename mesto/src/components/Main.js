@@ -1,13 +1,17 @@
 import { useEffect, useState } from "react";
-import ava from "../images/ava.jpg";
+import defaultAvatar from "../images/ava.jpg";
+import defaultCard from "../images/defCard.jpg";
 import {api} from "../utils/Api.js";
 
 export function Main({onEditAvatar, onEditProfile, onAddPlace}) {
+
+  // информация пользователя
+
   const [userName, setUserName] = useState("Пользователь");
   const [userDescription, setUserDescription ] = useState("Статус");
-  const [userAvatar, setUserAvatar] = useState(ava)
+  const [userAvatar, setUserAvatar] = useState(defaultAvatar)
   
-  
+   // загрузка информации о пользователе
   useEffect(() => {
     api.getUserInfo()
     .then(res => {
@@ -20,6 +24,18 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace}) {
     })
   })
 
+  // карточки
+  const [cards, setCards] = useState([]);
+
+  // загрузка карточек
+  useEffect(() => {
+    api.getCards()
+    .then(res => {
+      console.log(res);
+    })
+  })
+
+  // разметка
     return(
         <main>
         <section className="profile">
@@ -38,3 +54,17 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace}) {
         </main>
     );
 };
+
+{/* <template className="template">
+<li className="elements__box">
+  <button className="elements__delete-button" type="button"></button>
+  <img className="elements__image" src={defaultCard} alt="Каритнка в карточке"/>
+  <div className="elements__name-box">
+    <h2 className="elements__title"></h2>
+    <div className="elements__like">
+      <button className="elements__like-button" type="button"></button>
+      <p className="elements__likes-count">1</p>
+    </div>
+  </div>
+</li>
+</template> */}
