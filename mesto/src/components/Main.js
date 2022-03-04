@@ -1,3 +1,4 @@
+import React from "react";
 import { useEffect, useState } from "react";
 import defaultAvatar from "../images/ava.jpg";
 import {api} from "../utils/Api.js";
@@ -40,12 +41,12 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace}) {
 
   // обработка массива с карточками
   const sectionWithCards = () => {
-     cards.forEach((cardInfo) => {
-    return  <Card 
-      card={cardInfo}
-      key={cardInfo._id}/>
-    })
-  }
+    if (cards.length > 0) {
+      return cards.map((cardInfo) => (
+         <Card card={cardInfo} key={cardInfo._id} />
+      ));
+    }
+  };
 
   // разметка
     return(

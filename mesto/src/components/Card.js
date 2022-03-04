@@ -1,7 +1,7 @@
 // создание экземляра карточки
-
 export function Card({card}) {
-    return(
+
+    return (
             <li className="elements__box">
                 <button className="elements__delete-button" type="button"></button>
                 <img className="elements__image" src={card.link} alt={card.name}/>
