@@ -4,6 +4,7 @@ import {Header} from './Header.js';
 import {Main} from './Main.js';
 import { PopupWithForm } from './PopupWithForm.js';
 import {Footer} from './Footer.js';
+import { api } from '../utils/Api.js';
 
 function App() {
 
@@ -40,7 +41,7 @@ const closeAllPopups = (evt) => {
       <Main
       onEditAvatar={handleEditAvatarClick}
       onEditProfile={handleEditProfileClick}
-      onAddPlace={handleAddPlaceClick}
+      onAddPlace={handleAddPlaceClick}  
       />
       <Footer />
       <PopupWithForm
