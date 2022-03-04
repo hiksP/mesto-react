@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import defaultAvatar from "../images/ava.jpg";
-import defaultCard from "../images/defCard.jpg";
 import {api} from "../utils/Api.js";
+import {Card} from "./Card.js";
 
 export function Main({onEditAvatar, onEditProfile, onAddPlace}) {
 
@@ -19,8 +19,8 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace}) {
       setUserDescription(res.about);
       setUserAvatar(res.avatar);
     })
-    .catch(res => {
-      console.log(res);
+    .catch(err => {
+      console.log(err);
     })
   })
 
@@ -31,9 +31,21 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace}) {
   useEffect(() => {
     api.getCards()
     .then(res => {
-      console.log(res);
+      setCards(res);
     })
-  })
+    .catch((err) => {
+      console.log(err)
+    })
+  }, [])
+
+  // обработка массива с карточками
+  const sectionWithCards = () => {
+     cards.forEach((cardInfo) => {
+    return  <Card 
+      card={cardInfo}
+      key={cardInfo._id}/>
+    })
+  }
 
   // разметка
     return(
@@ -49,22 +61,9 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace}) {
         </section>
         <section className="elements">
           <ul className="elements__list">
+            {sectionWithCards()}
           </ul>
         </section>
         </main>
     );
 };
-
-{/* <template className="template">
-<li className="elements__box">
-  <button className="elements__delete-button" type="button"></button>
-  <img className="elements__image" src={defaultCard} alt="Каритнка в карточке"/>
-  <div className="elements__name-box">
-    <h2 className="elements__title"></h2>
-    <div className="elements__like">
-      <button className="elements__like-button" type="button"></button>
-      <p className="elements__likes-count">1</p>
-    </div>
-  </div>
-</li>
-</template> */}

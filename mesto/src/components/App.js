@@ -8,10 +8,13 @@ import { api } from '../utils/Api.js';
 
 function App() {
 
+// состояния попапов
+  
 const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
 const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
 
+// функции открытия попапов
 
 const handleEditAvatarClick = () => {
   setEditAvatarPopupOpen(true);
@@ -25,6 +28,8 @@ const handleAddPlaceClick = () => {
   setAddPlacePopupOpen(true);
 }
 
+// закрытие всех попапов
+
 const closeAllPopups = (evt) => {
   if(evt.key === 'Escape' || evt.nativeEvent.path[2].classList.contains('popup_opened')) {
     setEditAvatarPopupOpen(false);
@@ -32,6 +37,8 @@ const closeAllPopups = (evt) => {
     setAddPlacePopupOpen(false);
   }
 }
+
+// вся разметка сайта
 
   return (
   <>
