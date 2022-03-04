@@ -4,7 +4,7 @@ import defaultAvatar from "../images/ava.jpg";
 import {api} from "../utils/Api.js";
 import {Card} from "./Card.js";
 
-export function Main({onEditAvatar, onEditProfile, onAddPlace}) {
+export function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
 
   // информация пользователя
 
@@ -12,7 +12,8 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace}) {
   const [userDescription, setUserDescription ] = useState("Статус");
   const [userAvatar, setUserAvatar] = useState(defaultAvatar)
   
-   // загрузка информации о пользователе
+   // загрузка информации о пользователе с сервера
+
   useEffect(() => {
     api.getUserInfo()
     .then(res => {
@@ -26,9 +27,11 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace}) {
   })
 
   // карточки
+
   const [cards, setCards] = useState([]);
 
   // загрузка карточек
+
   useEffect(() => {
     api.getCards()
     .then(res => {
@@ -40,10 +43,11 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace}) {
   }, [])
 
   // обработка массива с карточками
+
   const sectionWithCards = () => {
     if (cards.length > 0) {
       return cards.map((cardInfo) => (
-         <Card card={cardInfo} key={cardInfo._id} />
+         <Card card={cardInfo} key={cardInfo._id} selectedCard={onCardClick} />
       ));
     }
   };

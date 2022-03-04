@@ -1,10 +1,9 @@
-import React from "react";
-
 class Api {
     constructor({adress, token}) {
         this._adress = adress;
         this._token = token;
     }
+
 
     _getResponseData(res) {
         if (!res.ok) {
@@ -12,6 +11,8 @@ class Api {
         }
         return res.json();
     } 
+
+    // загрука информации пользователя
 
     getUserInfo() {
         return fetch(`${this._adress}/users/me`, {
@@ -21,6 +22,8 @@ class Api {
         }) .then(this._getResponseData)
     }
 
+    // загрузка карточек
+
     getCards() {
         return fetch(`${this._adress}/cards`, {
             headers: {
@@ -28,7 +31,9 @@ class Api {
             }
         }) .then(this._getResponseData)
     }
-    
+  
+    // отправка информации о пользователе на сервер
+
     editInfo(name, status) {
         return fetch(`${this._adress}/users/me`, {
             method: "PATCH",
@@ -42,6 +47,8 @@ class Api {
             })
         }) .then(this._getResponseData)
     }
+
+    // загрузка карточки на сервер
 
     uploadCard(cardName, cardLink) {
         return fetch(`${this._adress}/cards`, {
@@ -57,6 +64,8 @@ class Api {
         }) .then(this._getResponseData)
     }
 
+    // удаление карточки
+
     deleteCard(cardId) {
         return fetch(`${this._adress}/cards/${cardId}`, {
             method: "DELETE",
@@ -65,6 +74,8 @@ class Api {
             }
         }) .then(this._getResponseData)
     }
+
+    // добавление лайка
 
     addLike(cardId) {
         return fetch(`${this._adress}/cards/${cardId}/likes`, {
@@ -75,6 +86,8 @@ class Api {
         }) .then(this._getResponseData)
     }
 
+    // удаление лайка
+
     deleteLike(cardId) {
         return fetch(`${this._adress}/cards/${cardId}/likes`, {
             method: "DELETE",
@@ -83,6 +96,8 @@ class Api {
             }
         }) .then(this._getResponseData)
     }
+    
+    // изминение аватарка пользователя
 
     changeAvatar(link) {
         return fetch(`${this._adress}/users/me/avatar`, {
@@ -97,6 +112,7 @@ class Api {
         }) .then(this._getResponseData)
     }
 }
+    // создание класса АПИ и его экспорт
 
 export const api = new Api({
     adress: 'https://mesto.nomoreparties.co/v1/cohort-35',

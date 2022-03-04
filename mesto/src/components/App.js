@@ -4,17 +4,18 @@ import {Header} from './Header.js';
 import {Main} from './Main.js';
 import { PopupWithForm } from './PopupWithForm.js';
 import {Footer} from './Footer.js';
-import { api } from '../utils/Api.js';
+import {ImagePopup} from './ImagePopup.js';
 
 function App() {
 
-// состояния попапов
+// стейт перменные попапов
   
 const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
 const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
+const [selectedCard, setSelectedCard] = useState(false);
 
-// функции открытия попапов
+// обработчики открытия попапов
 
 const handleEditAvatarClick = () => {
   setEditAvatarPopupOpen(true);
@@ -28,6 +29,11 @@ const handleAddPlaceClick = () => {
   setAddPlacePopupOpen(true);
 }
 
+const handleCardClick  = (card) => {
+  console.log(card);
+  setSelectedCard(card);
+}
+
 // закрытие всех попапов
 
 const closeAllPopups = (evt) => {
@@ -35,6 +41,7 @@ const closeAllPopups = (evt) => {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
+    setSelectedCard(false);
   }
 }
 
@@ -48,7 +55,8 @@ const closeAllPopups = (evt) => {
       <Main
       onEditAvatar={handleEditAvatarClick}
       onEditProfile={handleEditProfileClick}
-      onAddPlace={handleAddPlaceClick}  
+      onAddPlace={handleAddPlaceClick}
+      onCardClick={handleCardClick}
       />
       <Footer />
       <PopupWithForm
@@ -106,16 +114,7 @@ const closeAllPopups = (evt) => {
       isOpen={isAddPlacePopupOpen}
       onClose={closeAllPopups}
       title="Новое место"/>
-    </div>
-    <div className="popup popup_image">
-      <div className="popup__overlay"></div>
-      <figure className="popup__place-box">
-        <button className="popup__close popup__close_image" type="button"></button>
-        <img className="popup__place-picture" src="<%=require('./images/elementWall.jpg')%>" alt="открытая картинка"/>
-        <figcaption className="popup__place-text">
-          <p className="popup__place-name">Стена с текстом</p>
-        </figcaption>
-      </figure>
+      <ImagePopup onClose={closeAllPopups} card={selectedCard} />
     </div>
   </div>
 </>  
