@@ -114,7 +114,9 @@ const closeAllPopups = (evt) => {
       isOpen={isAddPlacePopupOpen}
       onClose={closeAllPopups}
       title="Новое место"/>
-      <ImagePopup onClose={closeAllPopups} card={selectedCard} />
+      <ImagePopup
+        onClose={closeAllPopups}
+        card={selectedCard} />
     </div>
   </div>
 </>  
