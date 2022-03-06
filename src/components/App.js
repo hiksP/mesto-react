@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Header} from './Header.js';
 import {Main} from './Main.js';
 import { PopupWithForm } from './PopupWithForm.js';
@@ -41,11 +41,19 @@ const closeAllPopups = () => {
     setSelectedCard(null);
 }
 
-// const esc = (evt) => {
-//   if(evt.key === 'Escape' || evt.nativeEvent.path[2].classList.contains('popup_opened')) {
-    
-//   }
-// }
+// закрытие попапов по эскейпу
+
+useEffect(() => {
+  const handleEscClose = (e) => {
+    if (e.key === "Escape") {
+      closeAllPopups();
+    }
+  };
+
+  document.addEventListener("keydown", handleEscClose);
+
+  return () => document.removeEventListener("keydown", handleEscClose);
+}, []); 
 
 // вся разметка сайта
 
@@ -64,18 +72,16 @@ const closeAllPopups = () => {
       <PopupWithForm
       name="edit"
       children={
-      <>  
           <ul className="popup__list">
-          <li className="popup__list-element">
-            <input type="text" className="popup__data-box" required minLength="2" maxLength="40" name="name" placeholder="Имя пользователя"/>
-            <span className="popup__input-error" id="name-error"></span>
-          </li>
-          <li className="popup__list-element">
-            <input type="text" className="popup__data-box" required minLength="2" maxLength="200" name="status" placeholder="Профессиональная деятельность"/>
-            <span className="popup__input-error" id="status-error"></span>
-          </li>
+            <li className="popup__list-element">
+              <input type="text" className="popup__data-box" required minLength="2" maxLength="40" name="name" placeholder="Имя пользователя"/>
+              <span className="popup__input-error" id="name-error"></span>
+            </li>
+            <li className="popup__list-element">
+              <input type="text" className="popup__data-box" required minLength="2" maxLength="200" name="status" placeholder="Профессиональная деятельность"/>
+              <span className="popup__input-error" id="status-error"></span>
+            </li>
         </ul>
-      </>
       }
       isOpen={isEditProfilePopupOpen}
       onClose={closeAllPopups}

@@ -1,24 +1,4 @@
-import { useEffect } from "react";
-
 export function ImagePopup({onClose, card}) {
-
-    // функция закрытия по эскейпу
-
-    const handleEscClose = (evt) => {
-        if(evt.key === "Escape") {
-            onClose(evt)
-        } 
-    }
-
-     // добавление обработчика события по открытию попапа 
-    useEffect(() => {
-        if(card) {
-            document.addEventListener('keydown', handleEscClose);
-        }
-        return () => {
-            document.removeEventListener('keydown', handleEscClose);
-        }
-    }, [card]);
 
     return(
         <>

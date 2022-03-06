@@ -1,26 +1,5 @@
-import { useEffect } from "react";
-
 export function PopupWithForm({name, children, isOpen, onClose, title}) {
-    
-    // функция закрытия по ескейпу
-
-    const handleEscClose = (evt) => {
-        if(evt.key === "Escape") {
-            onClose()
-        } 
-    }
-
-     // добавление обработчиков события по открытию попапа 
-    useEffect(() => {
-        if(isOpen) {
-            document.addEventListener('keydown', handleEscClose);
-        }
-        return () => {
-            document.removeEventListener('keydown', handleEscClose);
-        }
-    }, [isOpen]);
-
-    // разметка попапа
+   // разметка попапа
 
     return(
         <>

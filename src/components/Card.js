@@ -7,7 +7,6 @@ export function Card({card, selectedCard}) {
 
 
     return (
-        <>
             <li className="elements__box">
                 <button className="elements__delete-button" type="button"></button>
                 <img className="elements__image" onClick={handleOpenCardPopup} src={card.link} alt={card.name}/>
@@ -19,6 +18,5 @@ export function Card({card, selectedCard}) {
                     </div>
                 </div>
             </li>
-        </>        
     );
 }
