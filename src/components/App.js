@@ -1,5 +1,4 @@
 import React, {useState} from 'react';
-import '../index.css';
 import {Header} from './Header.js';
 import {Main} from './Main.js';
 import { PopupWithForm } from './PopupWithForm.js';
@@ -13,7 +12,7 @@ function App() {
 const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
 const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
-const [selectedCard, setSelectedCard] = useState(false);
+const [selectedCard, setSelectedCard] = useState(null);
 
 // обработчики открытия попапов
 
@@ -30,20 +29,23 @@ const handleAddPlaceClick = () => {
 }
 
 const handleCardClick  = (card) => {
-  console.log(card);
   setSelectedCard(card);
 }
 
 // закрытие всех попапов
 
-const closeAllPopups = (evt) => {
-  if(evt.key === 'Escape' || evt.nativeEvent.path[2].classList.contains('popup_opened')) {
+const closeAllPopups = () => {
     setEditAvatarPopupOpen(false);
     setEditProfilePopupOpen(false);
     setAddPlacePopupOpen(false);
-    setSelectedCard(false);
-  }
+    setSelectedCard(null);
 }
+
+// const esc = (evt) => {
+//   if(evt.key === 'Escape' || evt.nativeEvent.path[2].classList.contains('popup_opened')) {
+    
+//   }
+// }
 
 // вся разметка сайта
 

@@ -26,9 +26,9 @@ export function ImagePopup({onClose, card}) {
             <div className="popup__overlay"></div>
             <figure className="popup__place-box">
                 <button className="popup__close popup__close_image" onClick={onClose} type="button"></button>
-                <img className="popup__place-picture" src={card.link} alt={card.name}/>
+                <img className="popup__place-picture" src={card?.link} alt={card?.name}/>
                 <figcaption className="popup__place-text">
-                    <p className="popup__place-name">{card.name}</p>
+                    <p className="popup__place-name">{card?.name}</p>
                 </figcaption>
             </figure>
             </div>

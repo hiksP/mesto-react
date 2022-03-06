@@ -6,7 +6,7 @@ export function PopupWithForm({name, children, isOpen, onClose, title}) {
 
     const handleEscClose = (evt) => {
         if(evt.key === "Escape") {
-            onClose(evt)
+            onClose()
         } 
     }
 
