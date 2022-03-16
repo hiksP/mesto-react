@@ -4,6 +4,8 @@ import {Main} from './Main.js';
 import { PopupWithForm } from './PopupWithForm.js';
 import {Footer} from './Footer.js';
 import {ImagePopup} from './ImagePopup.js';
+import {api} from "../utils/Api.js";
+import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 function App() {
 
@@ -13,6 +15,21 @@ const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
 const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
 const [selectedCard, setSelectedCard] = useState(null);
+
+// стейт с данными пользователя 
+
+const [currentUser, setCurrentUser] = useState({})
+
+// установка данных текущего пользователя 
+useEffect(() => {
+  api.getUserInfo()
+  .then(res => {
+    setCurrentUser(res)
+  })
+  .catch(err => {
+    console.log(err);
+  })
+})
 
 // обработчики открытия попапов
 
@@ -58,7 +75,7 @@ useEffect(() => {
 // вся разметка сайта
 
   return (
-  <>
+  <CurrentUserContext.Provider value={currentUser}>
     <div className="page">
       <div className="page__size">
         <Header/>
@@ -127,7 +144,7 @@ useEffect(() => {
         card={selectedCard} />
     </div>
   </div>
-</>  
+</CurrentUserContext.Provider>  
   );
 }
 
