@@ -7,9 +7,9 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 export function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
 
-  // подписка на контекст с пользователем 
+  // подписка на контекст с текущим пользователем 
   
-  const user = React.useContext(CurrentUserContext);
+  const currentUser = React.useContext(CurrentUserContext);
 
   // карточки
 
@@ -41,11 +41,11 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
     return(
         <main>
         <section className="profile">
-          <a className="profile__avatar-hover" href="#" onClick={onEditAvatar}><img className="profile__avatar" src={user.avatar} alt="Аватар профиля"/></a>
+          <a className="profile__avatar-hover" href="#" onClick={onEditAvatar}><img className="profile__avatar" src={currentUser.avatar} alt="Аватар профиля"/></a>
           <div className="profile__info">
-            <h1 className="profile__name">{user.name}</h1>
+            <h1 className="profile__name">{currentUser.name}</h1>
             <button className="profile__edit-button" type="button" onClick={onEditProfile}></button>
-            <p className="profile__status">{user.about}</p>
+            <p className="profile__status">{currentUser.about}</p>
           </div>
           <button className="profile__add-button" type="button" onClick={onAddPlace}></button>
         </section>
