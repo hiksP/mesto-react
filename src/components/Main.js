@@ -54,12 +54,13 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
   // функция удаления карточки
 
   function handleCardDelete(card) {
+    // проверяем являемся ли мы владельцем карточки
     const isMine = card.owner._id === currentUser._id;
 
+    // отправляем запрос на удаление карточки
     api.deleteCard(card._id, isMine)
-    .then((res) => {
-      console.log(isMine);
-      console.log(res);
+    .then(() => {
+      setCards((state) => state.filter((c) => c._id != card._id));
     })
   }
 
