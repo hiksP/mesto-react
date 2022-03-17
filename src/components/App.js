@@ -6,6 +6,7 @@ import {Footer} from './Footer.js';
 import {ImagePopup} from './ImagePopup.js';
 import {api} from "../utils/Api.js";
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
+import { EditProfilePopup } from './EditProfilePopup.js';
 
 function App() {
 
@@ -86,24 +87,7 @@ useEffect(() => {
       onCardClick={handleCardClick}
       />
       <Footer />
-      <PopupWithForm
-      name="edit"
-      children={
-          <ul className="popup__list">
-            <li className="popup__list-element">
-              <input type="text" className="popup__data-box" required minLength="2" maxLength="40" name="name" placeholder="Имя пользователя"/>
-              <span className="popup__input-error" id="name-error"></span>
-            </li>
-            <li className="popup__list-element">
-              <input type="text" className="popup__data-box" required minLength="2" maxLength="200" name="status" placeholder="Профессиональная деятельность"/>
-              <span className="popup__input-error" id="status-error"></span>
-            </li>
-        </ul>
-      }
-      isOpen={isEditProfilePopupOpen}
-      onClose={closeAllPopups}
-      title="Редактировать профиль"
-      />
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
       <PopupWithForm
       name="avatar"
       children={
