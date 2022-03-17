@@ -2,7 +2,7 @@ import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 // создание экземляра карточки
-export function Card({card, selectedCard, onCardLike}) {
+export function Card({card, selectedCard, onCardLike, onCardDelete}) {
 
     // подписка на контекст с пользователем 
   
@@ -30,10 +30,14 @@ export function Card({card, selectedCard, onCardLike}) {
         selectedCard(card);
     }
 
+    const handleDeleteCard = () => {
+        onCardDelete(card);
+    }
+
 
     return (
             <li className="elements__box">
-                <button className={cardDeleteButtonClassName} type="button"></button>
+                <button className={cardDeleteButtonClassName} onClick={handleDeleteCard} type="button"></button>
                 <img className="elements__image" onClick={handleOpenCardPopup} src={card.link} alt={card.name}/>
                 <div className="elements__name-box">
                     <h2 className="elements__title">{card.name}</h2>

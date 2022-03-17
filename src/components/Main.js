@@ -20,6 +20,7 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
   useEffect(() => {
     api.getCards()
     .then(res => {
+      console.log(res);
       setCards(res);
     })
     .catch((err) => {
@@ -32,10 +33,12 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
   const sectionWithCards = () => {
     if (cards.length > 0) {
       return cards.map((cardInfo) => (
-         <Card card={cardInfo} onCardLike={handleCardLike} key={cardInfo._id} selectedCard={onCardClick} />
+         <Card card={cardInfo} onCardLike={handleCardLike} onCardDelete={handleCardDelete} key={cardInfo._id} selectedCard={onCardClick} />
       ));
     }
   };
+  
+  // функция лайка карточки
 
   function handleCardLike(card) {
     // Снова проверяем, есть ли уже лайк на этой карточке
@@ -47,6 +50,18 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
         setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
     });
 }
+
+  // функция удаления карточки
+
+  function handleCardDelete(card) {
+    const isMine = card.owner._id === currentUser._id;
+
+    api.deleteCard(card._id, isMine)
+    .then((res) => {
+      console.log(isMine);
+      console.log(res);
+    })
+  }
 
   // разметка
     return(
