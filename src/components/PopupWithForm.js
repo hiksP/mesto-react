@@ -1,4 +1,4 @@
-export function PopupWithForm({name, children, isOpen, onClose, title}) {
+export function PopupWithForm({name, children, isOpen, onClose, title, onSubmit}) {
    // разметка попапа
 
     return(
@@ -7,7 +7,7 @@ export function PopupWithForm({name, children, isOpen, onClose, title}) {
       <div className="popup__overlay"></div>
       <div className="popup__container">
         <button className={`popup__close popup__close_${name}`} type="button" onClick={onClose}></button>
-        <form className={`popup__form popup__form_${name}`} noValidate name={`data-${name}`}>
+        <form className={`popup__form popup__form_${name}`} noValidate name={`data-${name}`} onSubmit={onSubmit}>
           <h3 className="popup__title">{title}</h3>
           {children}
           <button className="popup__submit" type="submit">Сохранить</button>

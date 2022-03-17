@@ -50,6 +50,15 @@ const handleCardClick  = (card) => {
   setSelectedCard(card);
 }
 
+ const handleUpdateUser = (user) => {
+   console.log(user.name);
+  api.editInfo(user.name, user.about)
+  .then(res => {
+    setCurrentUser(res)
+  })
+  closeAllPopups();
+ }
+
 // закрытие всех попапов
 
 const closeAllPopups = () => {
@@ -87,7 +96,7 @@ useEffect(() => {
       onCardClick={handleCardClick}
       />
       <Footer />
-      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} />
+      <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
       <PopupWithForm
       name="avatar"
       children={
