@@ -77,25 +77,44 @@ class Api {
 
     // добавление лайка
 
-    addLike(cardId) {
-        return fetch(`${this._adress}/cards/${cardId}/likes`, {
-            method: "PUT",
-            headers: {
-                authorization: this._token,
-            }
-        }) .then(this._getResponseData)
-    }
+    // addLike(cardId) {
+    //     return fetch(`${this._adress}/cards/${cardId}/likes`, {
+    //         method: "PUT",
+    //         headers: {
+    //             authorization: this._token,
+    //         }
+    //     }) .then(this._getResponseData)
+    // }
 
-    // удаление лайка
+    // // удаление лайка
 
-    deleteLike(cardId) {
-        return fetch(`${this._adress}/cards/${cardId}/likes`, {
-            method: "DELETE",
-            headers: {
-                authorization: this._token,
-            }
-        }) .then(this._getResponseData)
-    }
+    // deleteLike(cardId) {
+    //     return fetch(`${this._adress}/cards/${cardId}/likes`, {
+    //         method: "DELETE",
+    //         headers: {
+    //             authorization: this._token,
+    //         }
+    //     }) .then(this._getResponseData)
+    // }
+
+    // изменение лайка (добавление или удаление)
+    changeLikeCardStatus(cardId, isLiked) {
+        if(isLiked) {
+            return fetch(`${this._adress}/cards/${cardId}/likes`, {
+                method: "DELETE",
+                headers: {
+                    authorization: this._token,
+                }
+            }) .then(this._getResponseData)
+        } else {
+            return fetch(`${this._adress}/cards/${cardId}/likes`, {
+                method: "PUT",
+                headers: {
+                    authorization: this._token,
+                }
+            }) .then(this._getResponseData)
+        }
+    } 
     
     // изминение аватарка пользователя
 

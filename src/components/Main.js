@@ -32,10 +32,21 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
   const sectionWithCards = () => {
     if (cards.length > 0) {
       return cards.map((cardInfo) => (
-         <Card card={cardInfo} key={cardInfo._id} selectedCard={onCardClick} />
+         <Card card={cardInfo} onCardLike={handleCardLike} key={cardInfo._id} selectedCard={onCardClick} />
       ));
     }
   };
+
+  function handleCardLike(card) {
+    // Снова проверяем, есть ли уже лайк на этой карточке
+    const isLiked = card.likes.some(i => i._id === currentUser._id);
+    
+    // Отправляем запрос в API и получаем обновлённые данные карточки
+    api.changeLikeCardStatus(card._id, isLiked)
+    .then((newCard) => {
+        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
+    });
+}
 
   // разметка
     return(

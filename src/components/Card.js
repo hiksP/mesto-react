@@ -2,7 +2,7 @@ import React from 'react';
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 // создание экземляра карточки
-export function Card({card, selectedCard}) {
+export function Card({card, selectedCard, onCardLike}) {
 
     // подписка на контекст с пользователем 
   
@@ -18,7 +18,13 @@ export function Card({card, selectedCard}) {
     const isLiked = card.likes.some(i => i._id === currentUser._id);
 
     // Создаём переменную, которую после зададим в `className` для кнопки лайка
-    const cardLikeButtonClassName = isLiked ? 'elements__like-button_active' : 'elements__like-button'
+    const cardLikeButtonClassName = isLiked ? 'elements__like-button elements__like-button_active' : 'elements__like-button'
+
+    // функции по клику на карточку
+
+    const handleLike = () => {
+        onCardLike(card); 
+    }
 
     const handleOpenCardPopup = () => {
         selectedCard(card);
@@ -32,7 +38,7 @@ export function Card({card, selectedCard}) {
                 <div className="elements__name-box">
                     <h2 className="elements__title">{card.name}</h2>
                     <div className="elements__like">
-                        <button className={cardLikeButtonClassName} type="button"></button>
+                        <button className={cardLikeButtonClassName} onClick={handleLike} type="button"></button>
                         <p className="elements__likes-count">{card.likes.length}</p>
                     </div>
                 </div>
