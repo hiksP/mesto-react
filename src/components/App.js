@@ -7,6 +7,7 @@ import {ImagePopup} from './ImagePopup.js';
 import {api} from "../utils/Api.js";
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import { EditProfilePopup } from './EditProfilePopup.js';
+import { EditAvatarPopup } from './EditAvatarPopup.js';
 
 function App() {
 // стейт перменные попапов
@@ -49,14 +50,29 @@ const handleCardClick  = (card) => {
   setSelectedCard(card);
 }
 
+// хендлеры обновления данных пользователя 
+
  const handleUpdateUser = (user) => {
-   console.log(user.name);
   api.editInfo(user.name, user.about)
   .then(res => {
     setCurrentUser(res)
   })
+  .catch(err => {
+    console.log(err)
+  })
   closeAllPopups();
  }
+
+ const handleUpdateAvatar = (ref) => {
+    api.changeAvatar(ref.avatar)
+    .then(res => {
+      setCurrentUser(res)
+    })
+    .catch(err => {
+      console.log(err)
+    })
+    closeAllPopups();
+ } 
 
 // закрытие всех попапов
 
@@ -96,22 +112,7 @@ useEffect(() => {
       />
       <Footer />
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
-      <PopupWithForm
-      name="avatar"
-      children={
-      <>
-          <ul className="popup__list">
-            <li className="popup__list-element">
-              <input type="url" className="popup__data-box" name="avatar" required placeholder="Сылка на аватар"/>
-              <span className="popup__input-error" id="avatar-error"></span>
-            </li>
-          </ul>
-      </>
-      }
-      isOpen={isEditAvatarPopupOpen}
-      onClose={closeAllPopups}
-      title="Обновить аватар"
-      />
+      <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
       <PopupWithForm
       name="add"
       children={
