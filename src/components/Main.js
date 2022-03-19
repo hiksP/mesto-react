@@ -1,8 +1,4 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import defaultAvatar from "../images/ava.jpg";
-import {api} from "../utils/Api.js";
-import {Card} from "./Card.js";
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
 export function Main({cards, onEditAvatar, onEditProfile, onAddPlace}) {

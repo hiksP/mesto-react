@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {Header} from './Header.js';
 import {Main} from './Main.js';
-import { PopupWithForm } from './PopupWithForm.js';
 import {Footer} from './Footer.js';
 import {ImagePopup} from './ImagePopup.js';
 import {api} from "../utils/Api.js";
@@ -137,7 +136,7 @@ useEffect(() => {
       // отправляем запрос на удаление карточки
       api.deleteCard(card._id, isMine)
       .then(() => {
-        setCards((state) => state.filter((c) => c._id != card._id));
+        setCards((state) => state.filter((c) => c._id !== card._id));
       })
     }
 
