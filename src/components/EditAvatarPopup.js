@@ -5,10 +5,10 @@ import { PopupWithForm } from './PopupWithForm.js';
 
 export function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {
 
-    const currentUser = useContext(CurrentUserContext);
-    
+    // создаем реф
     const avatarRef = useRef();
 
+    // передаем адрес аватара в пропс
     const handleSubmit = (e) => {
         e.preventDefault();
 

@@ -5,64 +5,11 @@ import {api} from "../utils/Api.js";
 import {Card} from "./Card.js";
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 
-export function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
+export function Main({cards, onEditAvatar, onEditProfile, onAddPlace}) {
 
   // подписка на контекст с текущим пользователем 
   
   const currentUser = React.useContext(CurrentUserContext);
-
-  // карточки
-
-  const [cards, setCards] = useState([]);
-
-  // загрузка карточек
-
-  useEffect(() => {
-    api.getCards()
-    .then(res => {
-      console.log(res);
-      setCards(res);
-    })
-    .catch((err) => {
-      console.log(err)
-    })
-  }, [])
-
-  // обработка массива с карточками
-
-  const sectionWithCards = () => {
-    if (cards.length > 0) {
-      return cards.map((cardInfo) => (
-         <Card card={cardInfo} onCardLike={handleCardLike} onCardDelete={handleCardDelete} key={cardInfo._id} selectedCard={onCardClick} />
-      ));
-    }
-  };
-  
-  // функция лайка карточки
-
-  function handleCardLike(card) {
-    // Снова проверяем, есть ли уже лайк на этой карточке
-    const isLiked = card.likes.some(i => i._id === currentUser._id);
-    
-    // Отправляем запрос в API и получаем обновлённые данные карточки
-    api.changeLikeCardStatus(card._id, isLiked)
-    .then((newCard) => {
-        setCards((state) => state.map((c) => c._id === card._id ? newCard : c));
-    });
-}
-
-  // функция удаления карточки
-
-  function handleCardDelete(card) {
-    // проверяем являемся ли мы владельцем карточки
-    const isMine = card.owner._id === currentUser._id;
-
-    // отправляем запрос на удаление карточки
-    api.deleteCard(card._id, isMine)
-    .then(() => {
-      setCards((state) => state.filter((c) => c._id != card._id));
-    })
-  }
 
   // разметка
     return(
@@ -78,7 +25,7 @@ export function Main({onEditAvatar, onEditProfile, onAddPlace, onCardClick}) {
         </section>
         <section className="elements">
           <ul className="elements__list">
-            {sectionWithCards()}
+            {cards}
           </ul>
         </section>
         </main>
