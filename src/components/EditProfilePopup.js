@@ -13,7 +13,7 @@ export function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
     useEffect(() => {
         setName(currentUser.name);
         setDescription(currentUser.about);
-      }, [currentUser]); 
+      }, [currentUser, isOpen]); 
 
     const handleChagneName = (e) => {
         setName(e.target.value);
@@ -44,11 +44,11 @@ export function EditProfilePopup({isOpen, onClose, onUpdateUser}) {
        children={
           <ul className="popup__list">
               <li className="popup__list-element">
-              <input type="text" onChange={handleChagneName} className="popup__data-box" required minLength="2" maxLength="40" name="name" placeholder="Имя пользователя"/>
+              <input type="text" value={name || ''} onChange={handleChagneName} className="popup__data-box" required minLength="2" maxLength="40" name="name" placeholder="Имя пользователя"/>
               <span className="popup__input-error" id="name-error"></span>
               </li>
               <li className="popup__list-element">
-              <input type="text" onChange={handleChangeAbout} className="popup__data-box" required minLength="2" maxLength="200" name="status" placeholder="Профессиональная деятельность"/>
+              <input type="text" value={description || ''} onChange={handleChangeAbout} className="popup__data-box" required minLength="2" maxLength="200" name="status" placeholder="Профессиональная деятельность"/>
               <span className="popup__input-error" id="status-error"></span>
               </li>
           </ul>

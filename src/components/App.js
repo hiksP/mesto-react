@@ -18,8 +18,6 @@ const [selectedCard, setSelectedCard] = useState(null);
 
 // стейт с данными пользователя 
 
-//check if its working on new pc
-
 const [currentUser, setCurrentUser] = useState({})
 
 // установка данных текущего пользователя 
@@ -31,7 +29,7 @@ useEffect(() => {
   .catch(err => {
     console.log(err);
   })
-})
+},[isEditProfilePopupOpen])
 
 // обработчики открытия попапов
 
