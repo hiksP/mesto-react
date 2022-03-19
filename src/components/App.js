@@ -18,6 +18,10 @@ const [isEditAvatarPopupOpen, setEditAvatarPopupOpen] = useState(false);
 const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
 const [selectedCard, setSelectedCard] = useState(null);
 
+// стейт карточек
+
+const [cards, setCards] = useState([]);
+
 // стейт с данными пользователя 
 
 const [currentUser, setCurrentUser] = useState({})
@@ -31,7 +35,7 @@ useEffect(() => {
   .catch(err => {
     console.log(err);
   })
-},[isEditProfilePopupOpen])
+},[])
 
 // обработчики открытия попапов
 
@@ -83,24 +87,6 @@ const closeAllPopups = () => {
     setAddPlacePopupOpen(false);
     setSelectedCard(null);
 }
-
-// закрытие попапов по эскейпу
-
-useEffect(() => {
-  const handleEscClose = (e) => {
-    if (e.key === "Escape") {
-      closeAllPopups();
-    }
-  };
-
-  document.addEventListener("keydown", handleEscClose);
-
-  return () => document.removeEventListener("keydown", handleEscClose);
-}, []); 
-
-  // карточки
-
-  const [cards, setCards] = useState([]);
 
   // загрузка карточек
 

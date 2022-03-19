@@ -1,4 +1,21 @@
+import { useEffect } from "react";
+
 export function PopupWithForm({name, children, isOpen, onClose, title, onSubmit}) {
+  
+// закрытие попапов по эскейпу
+
+useEffect(() => {
+  const handleEscClose = (e) => {
+    if (e.key === "Escape") {
+      onClose();
+    }
+  };
+
+  document.addEventListener("keydown", handleEscClose);
+
+  return () => document.removeEventListener("keydown", handleEscClose);
+}, []); 
+
    // разметка попапа
 
     return(
