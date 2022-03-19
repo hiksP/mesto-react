@@ -9,7 +9,6 @@ import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import { EditProfilePopup } from './EditProfilePopup.js';
 
 function App() {
-
 // стейт перменные попапов
   
 const [isEditProfilePopupOpen, setEditProfilePopupOpen] = useState(false);
@@ -18,6 +17,8 @@ const [isAddPlacePopupOpen, setAddPlacePopupOpen] = useState(false);
 const [selectedCard, setSelectedCard] = useState(null);
 
 // стейт с данными пользователя 
+
+//check if its working on new pc
 
 const [currentUser, setCurrentUser] = useState({})
 
