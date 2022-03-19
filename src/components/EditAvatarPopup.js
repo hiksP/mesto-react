@@ -1,6 +1,5 @@
-import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
-import React, { useState } from "react";
-import { useContext, useRef } from "react";
+import React from "react";
+import { useRef } from "react";
 import { PopupWithForm } from './PopupWithForm.js';
 
 export function EditAvatarPopup({isOpen, onClose, onUpdateAvatar}) {

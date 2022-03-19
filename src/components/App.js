@@ -8,6 +8,7 @@ import {api} from "../utils/Api.js";
 import { CurrentUserContext } from '../contexts/CurrentUserContext.js';
 import { EditProfilePopup } from './EditProfilePopup.js';
 import { EditAvatarPopup } from './EditAvatarPopup.js';
+import { AddPlacePopup } from './AddPlacePopup.js';
 import {Card} from "./Card.js";
 
 function App() {
@@ -140,6 +141,19 @@ useEffect(() => {
       })
     }
 
+    // функция добавления карточки
+
+    function handleAddPlaceSubmit(newCard) {
+      api.uploadCard(newCard.placeName, newCard.placeUrl)
+      .then((res) => {
+        setCards([res, ...cards]);
+      })
+      .catch(err => {
+        console.log(err);
+      })
+      closeAllPopups();
+    }
+
   // обработка массива с карточками
 
   const sectionWithCards = () => {
@@ -167,25 +181,7 @@ useEffect(() => {
       <Footer />
       <EditProfilePopup isOpen={isEditProfilePopupOpen} onClose={closeAllPopups} onUpdateUser={handleUpdateUser} />
       <EditAvatarPopup isOpen={isEditAvatarPopupOpen} onClose={closeAllPopups} onUpdateAvatar={handleUpdateAvatar} />
-      <PopupWithForm
-      name="add"
-      children={
-        <>
-          <ul className="popup__list">
-            <li className="popup__list-element">
-              <input type="text" className="popup__data-box" name="place-name" required minLength="2" maxLength="30" placeholder="Название"/>
-              <span className="popup__input-error" id="place-name-error"></span>
-            </li>
-            <li className="popup__list-element">
-              <input type="url" className="popup__data-box" name="place-link" required placeholder="Сылка на картинку"/>
-              <span className="popup__input-error" id="place-link-error"></span>
-            </li>
-          </ul>
-        </>
-      }
-      isOpen={isAddPlacePopupOpen}
-      onClose={closeAllPopups}
-      title="Новое место"/>
+      <AddPlacePopup isOpen={isAddPlacePopupOpen} onClose={closeAllPopups} onAddPlace={handleAddPlaceSubmit} />
       <ImagePopup
         onClose={closeAllPopups}
         card={selectedCard} />
